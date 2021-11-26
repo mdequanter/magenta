@@ -10,14 +10,14 @@ pygame.midi.init()
 for i in range(pygame.midi.get_count()):
     r = pygame.midi.get_device_info(i)
     (interf, name, is_input, is_output, is_opened) = r
-    print (interf, name, is_input, is_output, is_opened)
+    print (i,interf, name, is_input, is_output, is_opened)
     if is_output:
         last_port = i
 
 # You could also use this to use the default port rather than the last one.
 # default_port = pygame.midi.get_default_output_id()
 
-midi_out = pygame.midi.Output(last_port, 0)
+midi_out = pygame.midi.Output(3, 0)
 
 # select an instrument.
 instrument = 19 # general midi church organ.  # Piano
