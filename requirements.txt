@@ -1,0 +1,4 @@
+magenta
+tensorflow-gpu==2.1.0
+magenta==2.1.3
+pygame
