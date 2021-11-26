@@ -99,8 +99,8 @@ def input_main(device_id=None):
                 # check list: https://fmslogo.sourceforge.io/manual/midi-instrument.html
                 if (noteCode == 24) :
                     instrument = instrument - 1
-                    if (instrument < 1) :
-                        instrument = 1
+                    if (instrument < 0) :
+                        instrument = 0
                     print ("instrument set to:" + str(instrument))
                     midi_out.set_instrument(instrument)
                 if (noteCode == 25) :
