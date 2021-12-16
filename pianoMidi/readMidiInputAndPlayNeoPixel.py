@@ -1,14 +1,28 @@
 import sys
 import os
-
+import time
 import pygame as pg
 import pygame.midi
+import serial
 
+arduino = serial.Serial(port='COM4', baudrate=115200, timeout=.01)
+
+def write_read(x):
+    x= x + '$'
+    arduino.write(bytes(x, 'utf-8'))
+    data = arduino.readline()
+    return data
 
 def playNote(midi_out,note) :
     midi_out.note_on(note=note, velocity=127)
+    arduinoPixel = note - 36
+    value = write_read(str(arduinoPixel))
+
 def stopNote(midi_out,note) :
     midi_out.note_off(note=note, velocity=0)
+    arduinoPixel = note - 36 + 49
+    print(arduinoPixel)
+    value = write_read(str(arduinoPixel))
 
 
 def process_midi_input(midi_data):
@@ -39,6 +53,12 @@ def _print_device_info():
         )
 
 
+
+
+
+
+
+
 def input_main(device_id=None):
     pg.init()
     pg.fastevent.init()
@@ -65,7 +85,6 @@ def input_main(device_id=None):
     midi_out.set_instrument(instrument)
 
     pg.display.set_mode((1, 1))
-
 
 
     going = True
